@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+      <style>
+        /* Style for the card */
+        .card {
+            border: 1px solid #0099ff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Style for form elements */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        /* Style for form labels */
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        /* Style for form input fields */
+        input[type="text"],
+        input[type="password"] {
+            width: 96%;
+            padding: 10px;
+            border: 1px solid #4040bf;
+            border-radius: 5px;
+        }
+
+        /* Style for the form submit button */
+        input[type="submit"] {
+            background-color: #4040bf;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+               header {
+            text-align: center;
+            padding: 20px;
+            background-color: #333399;
+            color: white;
+            display: flex;
+            align-items: center; /* Vertically center align items */
+            justify-content: center; /* Horizontally center align items */
+        }
+
+        /* Style for the header image */
+        header img {
+            width: 100px; /* Adjust the width as needed */
+            height: auto;
+            margin-right: 20px; /* Add spacing between logo and text */
+        }
+
+        /* Style for the header text */
+        header h1 {
+            margin: 0; /* Remove default margin to prevent extra spacing */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{% static 'img/img_2.png' %}" alt="ABC Bank Logo"><h1>Welcome to ABC Bank Registration portal</h1>
+    </header>
+<!--<form action="register" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <h1>Registration</h1>-->
+<!--    <input type="text" name="username" placeholder="username"><br>-->
+<!--    <input type="password" name="password" placeholder="enter your password"><br>-->
+<!--    <input type="password" name="password1" placeholder="confirm password"><br>-->
+<!--    <input type="submit">-->
+
+<!--</form>-->
+<div class="card">
+        <form action="register" method="post">
+            {% csrf_token %}
+            <h1>Registration</h1>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" placeholder="Enter your password">
+            </div>
+            <div class="form-group">
+                <label for="password1">Confirm Password:</label>
+                <input type="password" name="password1" id="password1" placeholder="Confirm your password">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+    </div>
+{% for msg in messages %}
+<h2>{{msg}}</h2>
+{% endfor %}
+
+</body>
+</html>

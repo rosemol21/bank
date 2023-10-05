@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  </head>
+  <body  id="bg" style="background-image:url('{% static 'images/ph1.jpg' %}')">
+    <div class="container">
+      <div class="wrapper">
+        <div class="title"><span>Form</span></div>
+        <form action="{% url 'msg' %}" onsubmit="return validateForm()" method="post">
+           {% csrf_token %}
+          <div class="row">
+            <input type="text" placeholder="Name" required>
+          </div>
+          <div class="row">
+            <input type="Date" placeholder="Date" required>
+          </div>
+          <div class="row">
+            <input type="number" placeholder="Age" required>
+          </div>
+          <label>Gender :</label><br>
+            <input type="radio" name="hi" required><label>Male</label> &nbsp;
+            <input type="radio" name="hi" required><label>Female</label><br>
+          <div class="row">
+            <input type="tel" placeholder="PHONE NUMBER" required>
+          </div>
+          <div class="row">
+            <input type="email" placeholder="MAIL ID" required>
+          </div>
+          <div class="row">
+            <input type="text" placeholder="ADDRESS" required>
+          </div>
+          <label for="district">District:</label>
+          <div class="row">
+          <select id="district" name="district" onchange="populateCourses()" required>
+            <option value="">Select a district</option>
+            <option value="eranakulam">Eranakulam</option>
+            <option value="palakkad">Palakkad</option>
+            <option value="thrissur">Thrissur</option>
+            <option value="kozhikode">Kozhikode</option>
+            <option value="kannur">Kannur</option>
+          </select>&nbsp;
+          <label for="branch">Branch</label>
+              <select id="branch" name="branch" required>
+                <option value="">Select a Branch</option>
+
+              </select>
+            </div>
+            <label>Account Type:</label>&nbsp;
+            <div class="row">
+              <select required>
+                  <option>Saving Account</option>
+                  <option>Current Account</option>
+                  <option>Fixed deposit</option>
+                  <option>Recurring Deposit</option>
+                  <option>Others</option>
+              </select>
+            </div>
+
+            <label>
+                <label>Materials provide:</label><br>
+              <input type="checkbox" name="interests[]" value="option1">Debit Crad
+            </label>&nbsp;
+            <label>
+              <input type="checkbox" name="interests[]" value="option2">Credit card
+            </label>&nbsp;
+            <label>
+              <input type="checkbox" name="interests[]" value="option3">Checque Book
+            </label>&nbsp;
+            <input type="checkbox" name="interests[]" value="option3">UPI PIN
+        </label>&nbsp;
+        <input type="checkbox" name="interests[]" value="option1">Challan
+        </label>
+        </label><br>
+            <div class="row button">
+                <a href="{% url 'msg' %}"><input type="submit" value="Submit"></a>
+              </div>
+        </form>
+
+      </div>
+    </div>
+  </body>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
+}
+.buttonclass{
+    padding-left: 150px;
+    width: 180px;
+}
+button{
+    width: 150px;
+    background: red;
+    color: white;
+    margin-bottom:30px;
+}
+body{
+  background: #2d2d86;
+  overflow: hidden;
+}
+::selection{
+  background: rgb(51, 51, 153);
+}
+.container{
+  max-width: 440px;
+   /* padding: 0 20px;
+  margin: 170px auto; */
+  margin-top: 50px;
+  margin-left: 550px;
+}
+.wrapper{
+  width: 105%;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
+}
+.wrapper .title{
+  height: 50px;
+  background: #333399;
+  border-radius: 5px 5px 0 0;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper form{
+  padding: 30px 25px 25px 25px;
+}
+.wrapper form .row{
+  height: 35px;
+  margin-bottom: 5px;
+  position: relative;
+}
+.wrapper form .row input{
+  height:90%;
+  width: 100%;
+  outline: none;
+  padding-left: 60px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+form .row input:focus{
+  border-color: #2d2d86;
+  box-shadow: inset 0px 0px 2px 2px rgb(45, 45, 134);
+}
+form .row input::placeholder{
+  color: #999999;
+}
+.wrapper form .row i{
+  position: absolute;
+  width: 47px;
+  height: 300px;
+  color: #fff;
+  font-size: 18px;
+  background: #333399;
+  border: 1px solid #2d2d86;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper form .pass{
+  margin: -8px 0 20px 0;
+}
+.wrapper form .pass a{
+  color: #262673;
+  font-size: 17px;
+  text-decoration: none;
+}
+.wrapper form .pass a:hover{
+  text-decoration: underline;
+}
+.wrapper form .button input{
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 0px;
+  background: #000080;
+  border: 1px solid #262673;
+  cursor: pointer;
+}
+form .button input:hover{
+  background: #000066;
+}
+.wrapper form .signup-link{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 17px;
+}
+.wrapper form .signup-link a{
+  color: #000066;
+  text-decoration: none;
+}
+form .signup-link a:hover{
+  text-decoration: underline;
+}
+#bg{
+  background-repeat: no-repeat;
+  background-size:1900px 675px;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: bottom fixed;
+}
+  </style>
+  <script>
+      function populateCourses() {
+
+const department = document.getElementById('district').value;
+
+const courseDropdown = document.getElementById('branch');
+
+courseDropdown.innerHTML = '<option value="">Select a Branch</option>';
+
+switch (department) {
+  case 'eranakulam':
+    addOption(courseDropdown, 'Angamaly', 'Angamaly');
+    addOption(courseDropdown, 'Edappally', 'Edappally');
+    addOption(courseDropdown, 'Aluva', 'Aluva');
+    addOption(courseDropdown, 'Kochi', 'Kochi');
+    break;
+  case 'palakkad':
+    addOption(courseDropdown, 'Mannarkkad', 'Mannarkkad');
+    addOption(courseDropdown, 'Ottappalam', 'Ottappalam');
+    addOption(courseDropdown, 'Cherpulassery', 'Cherppulassery');
+    addOption(courseDropdown, 'Pattambi', 'Pattambi');
+    break;
+  case 'thrissur':
+    addOption(courseDropdown, 'Parappur', 'Parappur');
+    addOption(courseDropdown, 'Chavakkad', 'Chavakkad');
+    addOption(courseDropdown, 'Thripprayar', 'Thripprayar');
+    addOption(courseDropdown, 'Kunnamkulam', 'Kunnamkulam');
+    break;
+  case 'kozhikode':
+    addOption(courseDropdown, 'Mananchira', 'Mananchira');
+    addOption(courseDropdown, 'Ramanattukara', 'Ramanattukara');
+    addOption(courseDropdown, 'Feroke', 'Feroke');
+    addOption(courseDropdown, 'Vadakara', 'Vadakara');
+    break;
+  case 'kannur':
+    addOption(courseDropdown, 'Payyannur', ' Payyannur');
+    addOption(courseDropdown, 'Iritti', 'Iritti');
+    addOption(courseDropdown, 'Mahe', 'Mahe');
+    addOption(courseDropdown, 'Kannapuram', 'Kannapuram');
+    break;
+  default:
+    break;
+}
+}
+function addOption(selectElement, text, value) {
+const option = document.createElement('option');
+option.value = value;
+option.text = text;
+selectElement.appendChild(option);
+}
+function validateForm() {
+      var checkboxes = document.getElementsByName('interests[]');
+      var isChecked = false;
+
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          isChecked = true;
+          break;
+        }
+      }
+
+      if (!isChecked) {
+        alert('Please select at least one checkbox.');
+        return false;
+      }
+    }
+  </script>
+</html>
